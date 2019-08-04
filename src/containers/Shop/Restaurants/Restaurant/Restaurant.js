@@ -4,9 +4,9 @@ import classes from "./Restaurant.module.css";
 const restaurant = props => {
   return (
     <li className={classes.Restaurant}>
-      <img src="" />
-      <h1>{props.title}</h1>
-      <p>{props.worktime}</p>
+      <img src={props.img} />
+      <h1>{props.name}</h1>
+      <p>{props.workTime}</p>
     </li>
   );
 };
