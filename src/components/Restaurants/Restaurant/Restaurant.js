@@ -4,7 +4,7 @@ import classes from "./Restaurant.module.css";
 const restaurant = props => {
   return (
     <li className={classes.Restaurant}>
-      <img src={props.img} />
+      <img src={props.img} alt="rest_logo" />
       <h1>{props.name}</h1>
       <p>{props.workTime}</p>
     </li>
