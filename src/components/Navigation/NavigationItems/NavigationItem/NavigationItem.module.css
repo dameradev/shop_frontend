@@ -1,0 +1,8 @@
+.NavigationItem {
+  margin-right: 5px;
+}
+
+.NavigationItem a {
+  text-decoration: none;
+  color: white;
+}
