@@ -20,7 +20,7 @@ class CreateRestaurant extends Component {
 
   render() {
     return (
-      <div className={classes.CreateRestaurant}>
+      <form onSubmit={this.postRestaurant} className={classes.CreateRestaurant}>
         <label htmlFor="name">Restaurant name:</label>
         <input
           type="text"
@@ -35,8 +35,8 @@ class CreateRestaurant extends Component {
           value={this.state.img}
           onChange={event => this.setState({ img: event.target.value })}
         />
-        <button onClick={this.postRestaurant}>Add Restaurant!</button>
-      </div>
+        <button type="submit">Add Restaurant!</button>
+      </form>
     );
   }
 }

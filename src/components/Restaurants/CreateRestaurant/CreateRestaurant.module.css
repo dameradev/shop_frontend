@@ -1,5 +1,6 @@
 .CreateRestaurant {
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   height: 200px;
 }
 
@@ -8,12 +9,23 @@
   display: block;
   margin-top: 10px;
   width: 100%;
+  font-size: 1.5rem;
+}
+
+.CreateRestaurant input {
+  outline: none;
+  border: 1px solid black;
+  padding: 10px 10px;
+  box-sizing: border-box;
 }
 .CreateRestaurant button {
   margin-top: 20px;
   padding: 10px;
-  border: 1px solid green;
-  font-size: 1rem;
+  border: 1px solid rgb(2, 31, 8);
+  background: rgb(1, 63, 1);
+  color: white;
+  width: 100%;
+  font-size: 1.2rem;
 }
 
 .CreateRestaurant button:hover {

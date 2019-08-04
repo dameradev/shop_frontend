@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import classes from "./Restaurants.module.css";
 import Restaurant from "./Restaurant/Restaurant";
 import axios from "../../apis/shopBackend";
-import CreateRestaurant from "./CreateRestaurant/CreateRestaurant";
+
 import Aux from "../../hoc/Aux/Aux";
 class Restaurants extends Component {
   state = {
@@ -19,17 +21,18 @@ class Restaurants extends Component {
     if (!this.state.restaurants) return <div>Loading...</div>;
     const restaurants = this.state.restaurants.map(restaurant => {
       return (
-        <Restaurant
-          key={restaurant._id}
-          name={restaurant.name}
-          img={restaurant.img}
-          workTime={restaurant.workTime}
-        />
+        <Link key={restaurant._id} to={"/shop/" + restaurant._id}>
+          <Restaurant
+            name={restaurant.name}
+            img={restaurant.img}
+            workTime={restaurant.workTime}
+          />
+        </Link>
       );
     });
     return (
       <Aux>
-        <CreateRestaurant />
+        <Link to={"/create-restaurant"}>Create a new restaurant</Link>
         <ul className={classes.Restaurants}>{restaurants}</ul>
       </Aux>
     );

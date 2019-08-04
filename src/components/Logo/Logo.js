@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import classes from "./Logo.module.css";
 import shopLogo from "../../assets/images/shopLogo.png";
 const logo = () => (
-  <div className={classes.Logo}>
+  <Link to="/" className={classes.Logo}>
     <img src={shopLogo} alt="myShop" />
-  </div>
+  </Link>
 );
 
 export default logo;
