@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import classes from "./Restaurants.module.css";
-import Restaurant from "./Restaurant/Restaurant";
-import axios from "../../apis/shopBackend";
+import Restaurant from "../../../components/Restaurants/Restaurant/Restaurant";
+import axios from "../../../apis/shopBackend";
 
-import Aux from "../../hoc/Aux/Aux";
+import Aux from "../../../hoc/Aux/Aux";
 class Restaurants extends Component {
   state = {
     restaurants: null

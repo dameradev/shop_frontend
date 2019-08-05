@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "../../../apis/shopBackend";
 import FoodList from "../../Food/FoodList";
 import classes from "./SingleRestaurant.module.css";
@@ -25,6 +26,9 @@ class SingleRestaurant extends Component {
               alt={this.state.restaurant.name}
             />
           </div>
+          <Link to={"/create-food/" + this.state.restaurant._id}>
+            Create Food
+          </Link>
           <FoodList />
         </div>
       );
