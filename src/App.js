@@ -14,7 +14,6 @@ class App extends Component {
         <Route path="/" exact component={Shop} />
         <Route path="/shop/:id" component={SingleRestaurant} />
         <Route path="/create-restaurant" component={CreateRestaurant} />
-        <Route path="/create-food/:id" component={CreateFood} />
       </Layout>
     );
   }

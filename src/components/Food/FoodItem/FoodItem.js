@@ -2,7 +2,8 @@ import React from "react";
 import classes from "./FoodItem.module.css";
 const foodItem = props => (
   <li className={classes.foodItem}>
-    <h1>Title</h1>
+    <h3>{props.name}</h3>
+    <p>{props.description}</p>
   </li>
 );
 export default foodItem;

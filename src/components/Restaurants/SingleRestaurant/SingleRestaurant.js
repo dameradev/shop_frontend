@@ -3,20 +3,27 @@ import { Link } from "react-router-dom";
 import axios from "../../../apis/shopBackend";
 import FoodList from "../../Food/FoodList";
 import classes from "./SingleRestaurant.module.css";
+import CreateFood from "../../Food/CreateFood/CreateFood";
 
 class SingleRestaurant extends Component {
   state = {
-    restaurant: null
+    restaurant: null,
+    foods: null
   };
   componentDidMount() {
     const resId = this.props.match.params;
     // console.log(resId);
+
     axios.get("/shop/restaurants/" + resId.id).then(response => {
       this.setState({ restaurant: response.data });
     });
+    axios.get("/shop/foods/" + resId.id).then(response => {
+      this.setState({ foods: response.data.foods });
+    });
   }
   render() {
-    if (this.state.restaurant) {
+    console.log(this.state);
+    if (this.state.restaurant && this.state.foods) {
       return (
         <div>
           <div className={classes.RestaurantDescription}>
@@ -26,10 +33,8 @@ class SingleRestaurant extends Component {
               alt={this.state.restaurant.name}
             />
           </div>
-          <Link to={"/create-food/" + this.state.restaurant._id}>
-            Create Food
-          </Link>
-          <FoodList />
+          <CreateFood restaurantId={this.state.restaurant._id} />
+          <FoodList foods={this.state.foods} />
         </div>
       );
     }

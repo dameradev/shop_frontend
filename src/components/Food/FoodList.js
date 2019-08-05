@@ -4,11 +4,16 @@ import FoodItem from "./FoodItem/FoodItem";
 
 class FoodList extends Component {
   render() {
-    return (
-      <ul className={classes.FoodList}>
-        <FoodItem />
-      </ul>
-    );
+    const foodList = this.props.foods.map(food => {
+      return (
+        <FoodItem
+          key={food._id}
+          name={food.name}
+          description={food.description}
+        />
+      );
+    });
+    return <ul className={classes.FoodList}>{foodList}</ul>;
   }
 }
 

@@ -8,12 +8,14 @@ class CreateFood extends Component {
     description: "",
     restaurantId: ""
   };
-
+  componentDidMount() {
+    console.log(this.props);
+  }
   postFood = () => {
     const data = {
       name: this.state.name,
       description: this.state.description,
-      restaurantId: this.props.match.params
+      restaurantId: this.props.restaurantId
     };
     axios
       .post("shop/create-food", data)
