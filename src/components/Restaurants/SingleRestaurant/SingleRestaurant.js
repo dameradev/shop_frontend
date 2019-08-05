@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "../../../apis/shopBackend";
+import FoodList from "../../Food/FoodList";
+import classes from "./SingleRestaurant.module.css";
 
 class SingleRestaurant extends Component {
   state = {
@@ -16,11 +18,14 @@ class SingleRestaurant extends Component {
     if (this.state.restaurant) {
       return (
         <div>
-          <h1>{this.state.restaurant.name}</h1>
-          <img
-            src={this.state.restaurant.img}
-            alt={this.state.restaurant.name}
-          />
+          <div className={classes.RestaurantDescription}>
+            <h1>{this.state.restaurant.name}</h1>
+            <img
+              src={this.state.restaurant.img}
+              alt={this.state.restaurant.name}
+            />
+          </div>
+          <FoodList />
         </div>
       );
     }
