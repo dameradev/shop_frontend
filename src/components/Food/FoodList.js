@@ -10,6 +10,9 @@ class FoodList extends Component {
           key={food._id}
           name={food.name}
           description={food.description}
+          id={food._id}
+          foodClicked={this.props.clicked}
+          // onClick={this.props.foodClicked(food.id)}
         />
       );
     });

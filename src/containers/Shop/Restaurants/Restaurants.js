@@ -12,6 +12,7 @@ class Restaurants extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     axios
       .get("shop/restaurants")
       .then(response => this.setState({ restaurants: response.data }));
@@ -21,11 +22,15 @@ class Restaurants extends Component {
     if (!this.state.restaurants) return <div>Loading...</div>;
     const restaurants = this.state.restaurants.map(restaurant => {
       return (
-        <Link key={restaurant._id} to={"/shop/" + restaurant._id}>
+        <Link to={"/shop/" + restaurant._id}>
           <Restaurant
+            key={restaurant._id}
             name={restaurant.name}
             img={restaurant.img}
             workTime={restaurant.workTime}
+            onClick={() => {
+              this.restaurantSelectedHandler(restaurant.id);
+            }}
           />
         </Link>
       );

@@ -5,7 +5,7 @@ import Layout from "./hoc/Layout/Layout";
 import Shop from "./containers/Shop/Shop";
 import CreateRestaurant from "./components/Restaurants/CreateRestaurant/CreateRestaurant";
 import SingleRestaurant from "./components/Restaurants/SingleRestaurant/SingleRestaurant";
-import CreateFood from "./components/Food/CreateFood/CreateFood";
+// import CreateFood from "./components/Food/CreateFood/CreateFood";
 
 class App extends Component {
   render() {

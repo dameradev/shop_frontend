@@ -1,0 +1,8 @@
+.Cart {
+  height: 50vh;
+  width: 80%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: white;
+}
