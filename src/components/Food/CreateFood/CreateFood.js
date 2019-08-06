@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "../../../apis/shopBackend";
+
 import classes from "./CreateFood.module.css";
 
 class CreateFood extends Component {
@@ -25,6 +26,7 @@ class CreateFood extends Component {
   render() {
     return (
       <form onSubmit={this.postFood} className={classes.CreateFood}>
+        <h3>Add a new food item</h3>
         <label htmlFor="name">Food name:</label>
         <input
           type="text"
