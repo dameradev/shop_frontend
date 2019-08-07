@@ -12,7 +12,8 @@ class CreateFood extends Component {
   componentDidMount() {
     console.log(this.props);
   }
-  postFood = () => {
+  postFood = e => {
+    e.preventDefault();
     const data = {
       name: this.state.name,
       description: this.state.description,

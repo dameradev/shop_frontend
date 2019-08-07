@@ -23,13 +23,13 @@ class SingleRestaurant extends Component {
   componentDidMount() {
     const resId = this.props.match.params;
 
-    axios.get("/shop/restaurants/" + resId.id).then(response => {
+    axios.get("shop/restaurants/" + resId.id).then(response => {
       this.setState({ restaurant: response.data });
     });
-    axios.get("/shop/foods/" + resId.id).then(response => {
+    axios.get("shop/foods/" + resId.id).then(response => {
       this.setState({ foods: response.data.foods });
     });
-    axios.get("/shop/get-cart").then(response => {
+    axios.get("shop/status").then(response => {
       if (response.data) {
         console.log(response.data.items);
         this.setState({ cart: { items: response.data.items } });
@@ -39,11 +39,20 @@ class SingleRestaurant extends Component {
 
   // componentDidUpdate(prevState) {
   //   const cartItems = [...this.state.cart.items];
+  //   if (prevState.cart !== this.state.cart) {
+  //     axios
+  //       .post("/shop/add-to-cart", cartItems)
+  //       .then(response => console.log(response));
+  //   }
+  // }
+
+  // componentDidUpdate(prevState) {
+  //   const cartItems = [...this.state.cart.items];
   //   if (prevState.cart.items !== this.state.cart.items) {
   //   }
   // }
 
-  addToCart = id => {
+  addToCart = async id => {
     const items = [...this.state.cart.items];
     const foodIndex = items.findIndex(cp => {
       return cp["foodId"].toString() === id.toString();
@@ -64,9 +73,9 @@ class SingleRestaurant extends Component {
     if (items[0].quantity === 0) {
       items.shift();
     }
-    this.setState({ cart: { items } });
+
+    await this.setState({ cart: { items } });
     const cartItems = [...this.state.cart.items];
-    console.log("shet");
     axios
       .post("/shop/add-to-cart", cartItems)
       .then(response => console.log(response));

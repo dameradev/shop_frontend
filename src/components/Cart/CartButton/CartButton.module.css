@@ -1,0 +1,15 @@
+.CartButton {
+  position: fixed;
+  top: 10vh;
+  right: 0;
+  background: white;
+  border: 1px solid brown;
+  /* padding: 20px; */
+  box-sizing: border-box;
+  width: 70px;
+}
+
+.CartButton img {
+  width: 100%;
+  /* background: white; */
+}

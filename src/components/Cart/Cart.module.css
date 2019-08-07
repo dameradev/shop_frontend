@@ -5,4 +5,17 @@
   top: 0;
   right: 0;
   background: white;
+  padding: 0 30px;
+  box-sizing: border-box;
+  overflow: scroll;
+  border-left: 2px solid brown;
+  border-bottom: 2px solid brown;
+}
+
+.FoodItem {
+  border-bottom: 1px solid black;
+}
+
+.FoodItem:last-child {
+  border: none;
 }
