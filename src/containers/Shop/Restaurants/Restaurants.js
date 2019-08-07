@@ -4,18 +4,24 @@ import { Link } from "react-router-dom";
 import classes from "./Restaurants.module.css";
 import Restaurant from "../../../components/Restaurants/Restaurant/Restaurant";
 import axios from "../../../apis/shopBackend";
+import withErrorHandler from "../../../hoc/withErrorHandler/WithErrorHandler";
 
 import Aux from "../../../hoc/Aux/Aux";
 class Restaurants extends Component {
   state = {
-    restaurants: null
+    restaurants: null,
+    error: false
   };
 
   componentDidMount() {
-    axios.get("shop/restaurants").then(response => {
-      console.log(response);
-      this.setState({ restaurants: response.data });
-    });
+    axios
+      .get("shop/restaurants")
+      .then(response => {
+        this.setState({ restaurants: response.data });
+      })
+      .catch(error => {
+        this.setState({ error: true });
+      });
   }
 
   render() {
@@ -43,4 +49,4 @@ class Restaurants extends Component {
   }
 }
 
-export default Restaurants;
+export default withErrorHandler(Restaurants, axios);
