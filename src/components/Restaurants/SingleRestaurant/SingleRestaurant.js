@@ -12,43 +12,12 @@ class SingleRestaurant extends Component {
     cart: {
       items: [
         {
-          food: {},
+          foodId: {},
           quantity: 0,
           restaurantId: 0
         }
       ]
     }
-  };
-
-  addToCart = id => {
-    const items = [...this.state.cart.items];
-    const foodIndex = items.findIndex(cp => {
-      return cp["food"].toString() === id.toString();
-    });
-
-    let newQuantity = 1;
-
-    if (foodIndex >= 0) {
-      newQuantity = this.state.cart.items[foodIndex].quantity + 1;
-      items[foodIndex].quantity = newQuantity;
-    } else {
-      items.push({
-        food: id,
-        quantity: newQuantity,
-        restaurantId: this.props.match.params.id
-      });
-    }
-    if (items[0].quantity === 0) {
-      items.shift();
-    }
-    this.setState({ cart: { items } });
-
-    // if ()
-    // const foodIds = [];
-    // items.forEach(item => {
-    //   foodIds.push(item["food"]);
-    // });
-    // foodIds;
   };
 
   componentDidMount() {
@@ -60,7 +29,56 @@ class SingleRestaurant extends Component {
     axios.get("/shop/foods/" + resId.id).then(response => {
       this.setState({ foods: response.data.foods });
     });
+    axios.get("/shop/get-cart").then(response => {
+      if (response.data) {
+        console.log(response.data.items);
+        this.setState({ cart: { items: response.data.items } });
+      }
+    });
   }
+
+  // componentDidUpdate(prevState) {
+  //   const cartItems = [...this.state.cart.items];
+  //   if (prevState.cart.items !== this.state.cart.items) {
+  //   }
+  // }
+
+  addToCart = id => {
+    const items = [...this.state.cart.items];
+    const foodIndex = items.findIndex(cp => {
+      return cp["foodId"].toString() === id.toString();
+    });
+
+    let newQuantity = 1;
+
+    if (foodIndex >= 0) {
+      newQuantity = this.state.cart.items[foodIndex].quantity + 1;
+      items[foodIndex].quantity = newQuantity;
+    } else {
+      items.push({
+        foodId: id,
+        quantity: newQuantity,
+        restaurantId: this.props.match.params.id
+      });
+    }
+    if (items[0].quantity === 0) {
+      items.shift();
+    }
+    this.setState({ cart: { items } });
+    const cartItems = [...this.state.cart.items];
+    console.log("shet");
+    axios
+      .post("/shop/add-to-cart", cartItems)
+      .then(response => console.log(response));
+
+    // if ()
+    // const foodIds = [];
+    // items.forEach(item => {
+    //   foodIds.push(item["food"]);
+    // });
+    // foodIds;
+  };
+
   render() {
     console.log(this.state);
     if (this.state.restaurant && this.state.foods) {
