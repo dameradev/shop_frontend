@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 
 import axios from "../../../apis/shopBackend";
-import FoodList from "../../Food/FoodList";
+import FoodList from "../Food/FoodList";
 import classes from "./SingleRestaurant.module.css";
-import CreateFood from "../../Food/CreateFood/CreateFood";
+import CreateFood from "../Food/CreateFood/CreateFood";
 import RateRestaurant from "../RateRestaurant/RateRestaurant";
 class SingleRestaurant extends Component {
   state = {
@@ -39,21 +39,6 @@ class SingleRestaurant extends Component {
     });
   }
 
-  // componentDidUpdate(prevState) {
-  //   const cartItems = [...this.state.cart.items];
-  //   if (prevState.cart !== this.state.cart) {
-  //     axios
-  //       .post("/shop/add-to-cart", cartItems)
-  //       .then(response => console.log(response));
-  //   }
-  // }
-
-  // componentDidUpdate(prevState) {
-  //   const cartItems = [...this.state.cart.items];
-  //   if (prevState.cart.items !== this.state.cart.items) {
-  //   }
-  // }
-
   addToCart = async id => {
     const items = [...this.state.cart.items];
     const foodIndex = items.findIndex(cp => {
@@ -81,13 +66,6 @@ class SingleRestaurant extends Component {
     axios
       .post("/shop/add-to-cart", cartItems)
       .then(response => console.log(response));
-
-    // if ()
-    // const foodIds = [];
-    // items.forEach(item => {
-    //   foodIds.push(item["food"]);
-    // });
-    // foodIds;
   };
 
   postRestaurantRating = stars => {
@@ -98,14 +76,14 @@ class SingleRestaurant extends Component {
     axios.post("shop/rate-restaurant", data);
   };
 
-  createFoodHandler = () => {
-    this.props.history.push(this.props.match.url + "/rate-restaurant");
+  closeFormHandler = () => {
+    this.props.history.push("/shop/" + this.props.match.params.id);
   };
 
   render() {
     if (this.state.restaurant && this.state.foods) {
       return (
-        <div>
+        <div className={classes.SingleRestaurant}>
           <div className={classes.RestaurantDescription}>
             <h1>{this.state.restaurant.name}</h1>
             <img
@@ -113,29 +91,39 @@ class SingleRestaurant extends Component {
               alt={this.state.restaurant.name}
             />
           </div>
+          <div className={classes.RestaurantItems}>
+            <div className={classes.Links}>
+              <Link to={this.props.match.url + "/create-food"}>
+                Create food
+              </Link>
+              <Link to={this.props.match.url + "/rate-restaurant"}>
+                Rate restaurant
+              </Link>
+            </div>
+            <Switch>
+              <Route
+                path={this.props.match.url + "/create-food"}
+                render={() => (
+                  <CreateFood
+                    restaurantId={this.state.restaurant._id}
+                    closeForm={this.closeFormHandler}
+                  />
+                )}
+              />
+              <Route
+                path={this.props.match.url + "/rate-restaurant"}
+                exact
+                render={() => (
+                  <RateRestaurant
+                    rateRestaurant={this.postRestaurantRating}
+                    closeRateRestaurant={this.closeFormHandler}
+                  />
+                )}
+              />
+            </Switch>
 
-          <Link to={this.props.match.url + "/create-food"}>Create food</Link>
-          <Link to={this.props.match.url + "/rate-restaurant"}>
-            Rate restaurant
-          </Link>
-          <Switch>
-            <Route
-              path={this.props.match.url + "/create-food"}
-              component={CreateFood}
-              restaurantId={this.state.restaurant._id}
-            />
-            <Route
-              path={this.props.match.url + "/rate-restaurant"}
-              exact
-              component={RateRestaurant}
-              rateRestaurant={this.postRestaurantRating}
-            />
-          </Switch>
-
-          {/* <CreateFood restaurantId={this.state.restaurant._id} /> */}
-          {/* <RateRestaurant rateRestaurant={this.postRestaurantRating} /> */}
-          <FoodList foods={this.state.foods} clicked={this.addToCart} />
-          <button onClick={this.addToCart}>DANE</button>
+            <FoodList foods={this.state.foods} clicked={this.addToCart} />
+          </div>
         </div>
       );
     }

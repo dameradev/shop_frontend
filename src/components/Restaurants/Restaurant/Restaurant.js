@@ -3,9 +3,9 @@ import classes from "./Restaurant.module.css";
 
 const restaurant = props => {
   return (
-    <li className={classes.Restaurant}>
+    <li className={classes.Restaurant} onClick={props.clicked}>
       <img src={props.img} alt="rest_logo" />
-      <h1>{props.name}</h1>
+      <h3>{props.name}</h3>
       <p>{props.workTime}</p>
     </li>
   );

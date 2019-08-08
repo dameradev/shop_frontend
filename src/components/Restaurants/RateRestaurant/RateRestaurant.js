@@ -30,9 +30,17 @@ class RateRestaurant extends Component {
   render() {
     return (
       <div className={classes.RateRestaurant}>
-        <Stars starClicked={this.starAddRating} />
-        <textarea name="review-text" />
-        <button onClick={() => this.props.rateRestaurant(this.state.stars)}>
+        <button className={classes.X} onClick={this.props.closeRateRestaurant}>
+          X
+        </button>
+
+        <Stars className={classes.Stars} starClicked={this.starAddRating} />
+        <label htmlFor="review">Write a review</label>
+        <textarea name="review" cols="30" rows="10" />
+        <button
+          className={classes.Submit}
+          onClick={() => this.props.rateRestaurant(this.state.stars)}
+        >
           Rate Restaurant
         </button>
       </div>

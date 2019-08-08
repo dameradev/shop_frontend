@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "../../../apis/shopBackend";
+import axios from "../../../../apis/shopBackend";
 
 import classes from "./CreateFood.module.css";
 
@@ -27,6 +27,9 @@ class CreateFood extends Component {
   render() {
     return (
       <form onSubmit={this.postFood} className={classes.CreateFood}>
+        <button className={classes.X} onClick={this.props.closeForm}>
+          X
+        </button>
         <h3>Add a new food item</h3>
         <label htmlFor="name">Food name:</label>
         <input
@@ -43,7 +46,9 @@ class CreateFood extends Component {
           value={this.state.description}
           onChange={event => this.setState({ description: event.target.value })}
         />
-        <button type="submit">Add Food!</button>
+        <button className={classes.Submit} type="submit">
+          Add Food!
+        </button>
       </form>
     );
   }

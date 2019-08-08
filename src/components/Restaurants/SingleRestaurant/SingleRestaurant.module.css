@@ -1,8 +1,11 @@
-.RestaurantDescription {
+.SingleRestaurant {
   width: 80%;
-  box-sizing: border-box;
   margin: 0 auto;
+}
+.RestaurantDescription {
+  box-sizing: border-box;
   text-align: center;
+  width: 100%;
 }
 
 .RestaurantDescription h1 {
@@ -13,5 +16,23 @@
 }
 
 .RestaurantDescription img {
-  width: 80%;
+  width: 100%;
+}
+
+.RestaurantItems {
+  width: 100%;
+}
+
+.Links {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.Links a {
+  text-decoration: none;
+  margin-right: 10px;
+  color: white;
+  background: brown;
+  padding: 10px;
 }

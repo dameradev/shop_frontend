@@ -1,0 +1,40 @@
+.RateRestaurant {
+  display: flex;
+  flex-flow: column;
+  margin-top: 20px;
+  position: relative;
+}
+
+.RateRestaurant label {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+.RateRestaurant textarea {
+  border: 1px solid black;
+  font-size: 1.2rem;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 20px 0;
+}
+
+.RateRestaurant .Submit {
+  width: 50%;
+  background: green;
+  margin: 0 auto;
+  color: white;
+  font-size: 1rem;
+  padding: 10px;
+}
+
+.X {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: brown;
+  border: 1px solid red;
+  color: white;
+  padding: 5px;
+  font-size: 1rem;
+  width: 2rem;
+}

@@ -17,6 +17,7 @@ class Restaurants extends Component {
     axios
       .get("shop/restaurants")
       .then(response => {
+        console.log(response.data);
         this.setState({ restaurants: response.data });
       })
       .catch(error => {
@@ -24,25 +25,26 @@ class Restaurants extends Component {
       });
   }
 
+  getRestaurant = id => {
+    console.log("here");
+    this.props.props.history.push("/shop/" + id);
+  };
+
   render() {
     if (!this.state.restaurants) return <div>Loading...</div>;
     const restaurants = this.state.restaurants.map(restaurant => {
       return (
-        <Link to={"/shop/" + restaurant._id} key={restaurant._id}>
-          <Restaurant
-            name={restaurant.name}
-            img={restaurant.img}
-            workTime={restaurant.workTime}
-            onClick={() => {
-              this.restaurantSelectedHandler(restaurant.id);
-            }}
-          />
-        </Link>
+        <Restaurant
+          key={restaurant._id}
+          name={restaurant.name}
+          img={restaurant.img}
+          workTime={restaurant.workTime}
+          clicked={() => this.getRestaurant(restaurant._id)}
+        />
       );
     });
     return (
       <Aux>
-        <Link to={"/create-restaurant"}>Create a new restaurant</Link>
         <ul className={classes.Restaurants}>{restaurants}</ul>
       </Aux>
     );

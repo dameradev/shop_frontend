@@ -2,3 +2,19 @@
   margin: 2rem auto;
   width: 80%;
 }
+
+.ShopHeader {
+  border-bottom: 1px solid black;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ShopHeader a {
+  text-decoration: none;
+  color: white;
+  background: brown;
+  padding: 10px;
+  font-size: 1.2rem;
+}

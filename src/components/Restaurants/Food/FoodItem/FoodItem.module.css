@@ -1,8 +1,8 @@
 .FoodItem {
   /* padding: 2rem; */
-  margin: 0 auto;
-  width: 80%;
-  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  /* box-sizing: border-box; */
 }
 
 .FoodItem h3 {
