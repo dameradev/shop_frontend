@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import axios from "../../../apis/shopBackend";
 import FoodList from "../../Food/FoodList";
@@ -90,9 +91,11 @@ class SingleRestaurant extends Component {
 
   render() {
     console.log(this.state);
+
     if (this.state.restaurant && this.state.foods) {
       return (
         <div>
+          <Link to="/rate-restaurant">Rate restaurant</Link>
           <div className={classes.RestaurantDescription}>
             <h1>{this.state.restaurant.name}</h1>
             <img
