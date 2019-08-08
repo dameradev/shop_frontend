@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Layout from "./hoc/Layout/Layout";
 import Shop from "./containers/Shop/Shop";
@@ -13,10 +13,12 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <Route path="/" exact component={Shop} />
-        <Route path="/shop/:id" component={SingleRestaurant} />
-        <Route path="/create-restaurant" component={CreateRestaurant} />
-        <Route path="/rate-restaurant" component={RateRestaurant} />
+        <Switch>
+          <Route path="/" exact component={Shop} />
+          <Route path="/shop/:id" component={SingleRestaurant} />
+          <Route path="/create-restaurant" component={CreateRestaurant} />
+        </Switch>
+        {/* <Route path="/rate-restaurant" component={RateRestaurant} /> */}
       </Layout>
     );
   }
