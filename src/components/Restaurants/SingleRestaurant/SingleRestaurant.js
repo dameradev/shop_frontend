@@ -5,7 +5,7 @@ import axios from "../../../apis/shopBackend";
 import FoodList from "../../Food/FoodList";
 import classes from "./SingleRestaurant.module.css";
 import CreateFood from "../../Food/CreateFood/CreateFood";
-
+import RateRestaurant from "../RateRestaurant/RateRestaurant";
 class SingleRestaurant extends Component {
   state = {
     restaurant: null,
@@ -89,6 +89,14 @@ class SingleRestaurant extends Component {
     // foodIds;
   };
 
+  postRestaurantRating = stars => {
+    let data = {
+      stars: stars,
+      restaurantId: this.props.match.params.id
+    };
+    axios.post("shop/rate-restaurant", data);
+  };
+
   render() {
     console.log(this.state);
 
@@ -104,6 +112,7 @@ class SingleRestaurant extends Component {
             />
           </div>
           <CreateFood restaurantId={this.state.restaurant._id} />
+          <RateRestaurant rateRestaurant={this.postRestaurantRating} />
           <FoodList foods={this.state.foods} clicked={this.addToCart} />
           <button onClick={this.addToCart}>DANE</button>
         </div>

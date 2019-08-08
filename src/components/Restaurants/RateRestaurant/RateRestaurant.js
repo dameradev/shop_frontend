@@ -32,6 +32,9 @@ class RateRestaurant extends Component {
       <div className={classes.RateRestaurant}>
         <Stars starClicked={this.starAddRating} />
         <textarea name="review-text" />
+        <button onClick={() => this.props.rateRestaurant(this.state.stars)}>
+          Rate Restaurant
+        </button>
       </div>
     );
   }
