@@ -8,9 +8,6 @@ class Shop extends Component {
   state = {
     showCart: true
   };
-  componentDidMount() {
-    console.log("SHOPPPPP PROSPSS", this.props);
-  }
 
   render() {
     return (

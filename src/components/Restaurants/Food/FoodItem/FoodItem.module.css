@@ -11,3 +11,9 @@
   box-sizing: border-box;
   width: 100%;
 }
+
+@media (min-width: 40rem) {
+  .FoodItem {
+    width: 30%;
+  }
+}

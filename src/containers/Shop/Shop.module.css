@@ -16,5 +16,10 @@
   color: white;
   background: brown;
   padding: 10px;
-  font-size: 1.2rem;
+}
+
+@media (min-width: 40rem) {
+  .ShopHeader a {
+    font-size: 1.2rem;
+  }
 }
