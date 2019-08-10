@@ -78,6 +78,7 @@ class SingleRestaurant extends Component {
 
   closeFormHandler = e => {
     e.preventDefault();
+    console.log(e);
     this.props.history.push("/shop/" + this.props.match.params.id);
   };
 

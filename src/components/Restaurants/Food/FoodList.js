@@ -10,6 +10,7 @@ class FoodList extends Component {
           key={food._id}
           name={food.name}
           description={food.description}
+          price={food.price}
           id={food._id}
           foodClicked={this.props.clicked}
           // onClick={this.props.foodClicked(food.id)}

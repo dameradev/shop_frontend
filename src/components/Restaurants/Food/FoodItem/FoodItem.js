@@ -6,6 +6,9 @@ const foodItem = props => {
     <li className={classes.FoodItem}>
       <h3>{props.name}</h3>
       <p>{props.description}</p>
+      <p>
+        Price: <strong>{props.price}</strong>
+      </p>
       <p>{props.id}</p>
       <button onClick={() => props.foodClicked(id)}>Add to cart</button>
     </li>

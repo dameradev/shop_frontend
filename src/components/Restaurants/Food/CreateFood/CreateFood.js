@@ -32,23 +32,34 @@ class CreateFood extends Component {
         value: ""
       }
     },
-    restaurantId: ""
+    restaurantId: "",
+    loading: false
   };
 
   componentDidMount() {
     console.log(this.props);
   }
 
-  postFood = e => {
+  foodCreateHandler = e => {
     e.preventDefault();
+
+    this.setState({ loading: true });
+    const formData = {};
+    for (let formElementIdentifier in this.state.foodForm) {
+      formData[formElementIdentifier] = this.state.foodForm[
+        formElementIdentifier
+      ].value;
+    }
+    console.log(formData);
     const data = {
-      name: this.state.name,
-      description: this.state.description,
+      name: formData.name,
+      description: formData.description,
+      price: formData.price,
       restaurantId: this.props.restaurantId
     };
     axios
       .post("shop/create-food", data)
-      .then(response => console.log(response));
+      .then(response => this.setState({ loading: false }));
   };
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -72,12 +83,18 @@ class CreateFood extends Component {
     }
 
     return (
-      <form onSubmit={this.postFood} className={classes.CreateFood}>
-        <button className={classes.X} onClick={this.props.closeForm}>
-          X
-        </button>
+      <form onSubmit={this.foodCreateHandler} className={classes.CreateFood}>
+        <div className={classes.Header}>
+          <h3>Add a new food item</h3>
+          <button
+            className={classes.X}
+            type="button"
+            onClick={this.props.closeForm}
+          >
+            X
+          </button>
+        </div>
 
-        <h3>Add a new food item</h3>
         {formElementsArray.map(formElement => {
           return (
             <Input

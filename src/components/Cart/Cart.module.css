@@ -20,3 +20,9 @@
 .FoodItem:last-child {
   border: none;
 }
+
+@media (min-width: 600px) {
+  .Cart {
+    width: 500px;
+  }
+}
