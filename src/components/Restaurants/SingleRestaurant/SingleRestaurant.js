@@ -76,7 +76,8 @@ class SingleRestaurant extends Component {
     axios.post("shop/rate-restaurant", data);
   };
 
-  closeFormHandler = () => {
+  closeFormHandler = e => {
+    e.preventDefault();
     this.props.history.push("/shop/" + this.props.match.params.id);
   };
 

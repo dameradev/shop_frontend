@@ -18,7 +18,7 @@ class Shop extends Component {
           <Link to={"/create-restaurant"}>Create a new restaurant</Link>
         </div>
 
-        <Restaurants props={this.props} />
+        <Restaurants />
       </div>
     );
   }
