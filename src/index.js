@@ -9,11 +9,17 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import restaurantReducer from "./store/reducers/restaurant";
+import foodReducer from "./store/reducers/food";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const rootReducer = combineReducers({
+  restaurant: restaurantReducer,
+  food: foodReducer
+});
+
 const store = createStore(
-  restaurantReducer,
+  rootReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
 

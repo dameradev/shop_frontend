@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { Link, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 import axios from "../../../apis/shopBackend";
 import FoodList from "../Food/FoodList";
 import classes from "./SingleRestaurant.module.css";
 import CreateFood from "../Food/CreateFood/CreateFood";
 import RateRestaurant from "../RateRestaurant/RateRestaurant";
+
+import * as actions from "../../../store/actions/index";
+
 class SingleRestaurant extends Component {
   state = {
     restaurant: null,
@@ -22,9 +26,8 @@ class SingleRestaurant extends Component {
     axios.get("shop/restaurants/" + resId.id).then(response => {
       this.setState({ restaurant: response.data });
     });
-    axios.get("shop/foods/" + resId.id).then(response => {
-      this.setState({ foods: response.data.foods });
-    });
+    this.props.onFetchFoods(resId);
+    console.log(this.props);
     axios.get("shop/status").then(response => {
       if (response.data) {
         console.log(response.data.items);
@@ -34,8 +37,8 @@ class SingleRestaurant extends Component {
   }
 
   addToCart = async id => {
-    const {} = this.state;
-    const {} = this.props;
+    // const {} = this.state;
+    // const {} = this.props;
     const items = [...this.state.cart.items];
     console.log(items);
     const foodIndex = items.findIndex(cp => {
@@ -81,7 +84,7 @@ class SingleRestaurant extends Component {
   };
 
   render() {
-    if (this.state.restaurant && this.state.foods) {
+    if (this.state.restaurant && this.props.foods) {
       return (
         <div className={classes.SingleRestaurant}>
           <div className={classes.RestaurantDescription}>
@@ -122,7 +125,7 @@ class SingleRestaurant extends Component {
               />
             </Switch>
 
-            <FoodList foods={this.state.foods} clicked={this.addToCart} />
+            <FoodList foods={this.props.foods} clicked={this.addToCart} />
           </div>
         </div>
       );
@@ -130,4 +133,20 @@ class SingleRestaurant extends Component {
     return <div>Loading..</div>;
   }
 }
-export default SingleRestaurant;
+
+const mapStateToProps = state => {
+  return {
+    foods: state.food.foods
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchFoods: id => dispatch(actions.fetchFoods(id))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleRestaurant);
