@@ -1,5 +1,8 @@
 .CreateFood {
-  /* position: sticky; */
+  margin-top: 20px;
+  padding: 40px;
+  box-shadow: 0 2px 3px #ccc;
+  border: 1px solid #eee;
 }
 
 .CreateFood input,
@@ -23,11 +26,12 @@
 }
 
 .CreateFood .Submit {
-  width: 100%;
+  width: 50%;
+  margin: 10px auto;
   box-sizing: border-box;
   padding: 10px;
   background: green;
-  margin-top: 10px;
+
   font-size: 1.2rem;
   color: white;
 }

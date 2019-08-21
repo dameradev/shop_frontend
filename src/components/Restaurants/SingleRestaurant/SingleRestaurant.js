@@ -11,13 +11,7 @@ class SingleRestaurant extends Component {
     restaurant: null,
     foods: null,
     cart: {
-      items: [
-        {
-          foodId: {},
-          quantity: 0,
-          restaurantId: 0
-        }
-      ]
+      items: []
     }
   };
 
@@ -40,7 +34,10 @@ class SingleRestaurant extends Component {
   }
 
   addToCart = async id => {
+    const {} = this.state;
+    const {} = this.props;
     const items = [...this.state.cart.items];
+    console.log(items);
     const foodIndex = items.findIndex(cp => {
       return cp["foodId"].toString() === id.toString();
     });
@@ -57,9 +54,10 @@ class SingleRestaurant extends Component {
         restaurantId: this.props.match.params.id
       });
     }
-    if (items[0].quantity === 0) {
-      items.shift();
-    }
+    // console.log(items[0]);
+    // if (items[0].quantity === 0) {
+    //   items.shift();
+    // }
 
     await this.setState({ cart: { items } });
     const cartItems = [...this.state.cart.items];

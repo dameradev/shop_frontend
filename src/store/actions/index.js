@@ -1,0 +1,1 @@
+export { fetchRestaurants } from "./restaurant";

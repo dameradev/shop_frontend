@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 import classes from "./Restaurants.module.css";
 import Restaurant from "../../../components/Restaurants/Restaurant/Restaurant";
 import axios from "../../../apis/shopBackend";
 import withErrorHandler from "../../../hoc/withErrorHandler/WithErrorHandler";
 import Spinner from "../../../components/UI/Spinner/Spinner";
-
 import Aux from "../../../hoc/Aux/Aux";
+
+import * as actions from "../../../store/actions/index";
+
 class Restaurants extends Component {
   state = {
     restaurants: null,
@@ -16,15 +19,7 @@ class Restaurants extends Component {
   };
 
   componentDidMount() {
-    this.setState({ loading: true });
-    axios
-      .get("shop/restaurants")
-      .then(response => {
-        this.setState({ restaurants: response.data, loading: false });
-      })
-      .catch(error => {
-        this.setState({ error: true, loading: false });
-      });
+    this.props.onFetchRestaurants();
   }
 
   getRestaurant = id => {
@@ -37,8 +32,8 @@ class Restaurants extends Component {
       restaurants = <Spinner />;
     }
 
-    if (this.state.restaurants) {
-      restaurants = this.state.restaurants.map(restaurant => {
+    if (this.props.restaurants) {
+      restaurants = this.props.restaurants.map(restaurant => {
         return (
           <Restaurant
             key={restaurant._id}
@@ -59,4 +54,19 @@ class Restaurants extends Component {
   }
 }
 
-export default withErrorHandler(withRouter(Restaurants), axios);
+const mapStateToProps = state => {
+  return {
+    restaurants: state.restaurants
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchRestaurants: () => dispatch(actions.fetchRestaurants())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(withRouter(Restaurants), axios));
