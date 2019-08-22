@@ -28,11 +28,10 @@ class Restaurants extends Component {
 
   render() {
     let restaurants = null;
-    if (this.state.loading) {
-      restaurants = <Spinner />;
-    }
 
-    if (this.props.restaurants) {
+    restaurants = <Spinner />;
+
+    if (this.props.restaurants && !this.props.loading) {
       restaurants = this.props.restaurants.map(restaurant => {
         return (
           <Restaurant
@@ -56,7 +55,8 @@ class Restaurants extends Component {
 
 const mapStateToProps = state => {
   return {
-    restaurants: state.restaurant.restaurants
+    restaurants: state.restaurant.restaurants,
+    loading: state.restaurant.loading
   };
 };
 

@@ -7,6 +7,7 @@ import FoodList from "../Food/FoodList";
 import classes from "./SingleRestaurant.module.css";
 import CreateFood from "../Food/CreateFood/CreateFood";
 import RateRestaurant from "../RateRestaurant/RateRestaurant";
+import Spinner from "../../UI/Spinner/Spinner";
 
 import * as actions from "../../../store/actions/index";
 
@@ -125,7 +126,11 @@ class SingleRestaurant extends Component {
               />
             </Switch>
 
-            <FoodList foods={this.props.foods} clicked={this.addToCart} />
+            <FoodList
+              foods={this.props.foods}
+              clicked={this.addToCart}
+              loading={this.props.loading}
+            />
           </div>
         </div>
       );
@@ -136,7 +141,8 @@ class SingleRestaurant extends Component {
 
 const mapStateToProps = state => {
   return {
-    foods: state.food.foods
+    foods: state.food.foods,
+    loading: state.food.loading
   };
 };
 

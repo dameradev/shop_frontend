@@ -23,6 +23,7 @@ export const fetchRestaurantsFail = error => {
 
 export const fetchRestaurants = () => {
   return dispatch => {
+    dispatch(fetchRestaurantsStart());
     axios
       .get("shop/restaurants")
       .then(response => {

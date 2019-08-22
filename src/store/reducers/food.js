@@ -1,24 +1,28 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const intitalState = {
-  foods: []
+  foods: [],
+  loading: false
 };
 
 const reducer = (state = intitalState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_RESTAURANTS_START:
+    case actionTypes.FETCH_FOOD_START:
       return {
-        ...state
+        ...state,
+        loading: true
       };
     case actionTypes.FETCH_FOOD_SUCCESS:
       return {
         ...state,
-        foods: action.foods
+        foods: action.foods,
+        loading: false
       };
     case actionTypes.FETCH_FOOD_FAIL:
       return {
         ...state,
-        error: action.error
+        error: action.error,
+        loading: false
       };
     default:
       return state;

@@ -21,6 +21,7 @@ export const fetchFoodFail = error => {
 
 export const fetchFoods = restId => {
   return dispatch => {
+    dispatch(fetchFoodStart());
     axios
       .get("shop/foods/" + restId.id)
       .then(response => {
