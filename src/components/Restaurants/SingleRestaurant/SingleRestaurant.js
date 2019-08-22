@@ -21,10 +21,7 @@ class SingleRestaurant extends Component {
 
   componentDidMount() {
     const resId = this.props.match.params;
-
-    axios.get("shop/restaurants/" + resId.id).then(response => {
-      this.setState({ restaurant: response.data });
-    });
+    this.props.onFetchRestaurant(resId);
     this.props.onFetchFoods(resId);
 
     axios.get("shop/status").then(response => {
@@ -80,14 +77,14 @@ class SingleRestaurant extends Component {
   };
 
   render() {
-    if (this.state.restaurant && this.props.foods) {
+    if (this.props.restaurant && this.props.foods && !this.props.loading) {
       return (
         <div className={classes.SingleRestaurant}>
           <div className={classes.RestaurantDescription}>
-            <h1>{this.state.restaurant.name}</h1>
+            <h1>{this.props.restaurant.name}</h1>
             <img
-              src={this.state.restaurant.img}
-              alt={this.state.restaurant.name}
+              src={this.props.restaurant.img}
+              alt={this.props.restaurant.name}
             />
           </div>
           <div className={classes.RestaurantItems}>
@@ -104,7 +101,7 @@ class SingleRestaurant extends Component {
                 path={this.props.match.url + "/create-food"}
                 render={() => (
                   <CreateFood
-                    restaurantId={this.state.restaurant._id}
+                    restaurantId={this.props.restaurant._id}
                     closeForm={this.closeFormHandler}
                   />
                 )}
@@ -136,6 +133,7 @@ class SingleRestaurant extends Component {
 
 const mapStateToProps = state => {
   return {
+    restaurant: state.restaurant.restaurant,
     foods: state.food.foods,
     loading: state.food.loading
   };
@@ -143,7 +141,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchFoods: id => dispatch(actions.fetchFoods(id))
+    onFetchFoods: id => dispatch(actions.fetchFoods(id)),
+    onFetchRestaurant: id => dispatch(actions.fetchRestaurant(id))
   };
 };
 

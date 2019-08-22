@@ -1,2 +1,2 @@
-export { fetchRestaurants } from "./restaurant";
+export { fetchRestaurants, fetchRestaurant } from "./restaurant";
 export { fetchFoods } from "./food";

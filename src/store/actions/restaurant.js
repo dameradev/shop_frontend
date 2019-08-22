@@ -35,3 +35,35 @@ export const fetchRestaurants = () => {
       });
   };
 };
+
+export const fetchRestaurantStart = () => {
+  return {
+    type: actionTypes.FETCH_RESTAURANT_START
+  };
+};
+
+export const fetchRestaurantSuccess = restaurant => {
+  return {
+    type: actionTypes.FETCH_RESTAURANT_SUCCESS,
+    restaurant
+  };
+};
+
+export const fetchRestaurantFail = error => {
+  return {
+    type: actionTypes.FETCH_RESTAURANT_FAIL,
+    error: error
+  };
+};
+
+export const fetchRestaurant = resId => {
+  return dispatch => {
+    dispatch(fetchRestaurantStart());
+    axios
+      .get("shop/restaurants/" + resId.id)
+      .then(response => {
+        dispatch(fetchRestaurantSuccess(response.data));
+      })
+      .catch(err => dispatch(fetchRestaurantFail(err)));
+  };
+};
