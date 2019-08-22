@@ -9,13 +9,9 @@ class Cart extends Component {
 
   loadData() {
     if (this.state.cartItems.length < 1) {
-      axios
-        .get("shop/get-cart")
-        .then(response => {
-          console.log("response");
-          this.setState({ cartItems: response.data.items });
-        })
-        .then(() => console.log(this.state));
+      axios.get("shop/get-cart").then(response => {
+        this.setState({ cartItems: response.data.items });
+      });
     }
   }
   componentDidMount() {
@@ -27,13 +23,9 @@ class Cart extends Component {
       prevState.cartItems.items !== this.state.items ||
       prevProps.show !== this.props.show
     ) {
-      axios
-        .get("shop/get-cart")
-        .then(response => {
-          console.log("response");
-          this.setState({ cartItems: response.data.items });
-        })
-        .then(() => console.log(this.state));
+      axios.get("shop/get-cart").then(response => {
+        this.setState({ cartItems: response.data.items });
+      });
     }
   }
 
@@ -50,8 +42,6 @@ class Cart extends Component {
           </div>
         );
       });
-
-    console.log(foods);
 
     return this.props.show ? (
       <div className={classes.Cart}>

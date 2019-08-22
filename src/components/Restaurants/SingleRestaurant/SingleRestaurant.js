@@ -7,7 +7,6 @@ import FoodList from "../Food/FoodList";
 import classes from "./SingleRestaurant.module.css";
 import CreateFood from "../Food/CreateFood/CreateFood";
 import RateRestaurant from "../RateRestaurant/RateRestaurant";
-import Spinner from "../../UI/Spinner/Spinner";
 
 import * as actions from "../../../store/actions/index";
 
@@ -21,17 +20,15 @@ class SingleRestaurant extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     const resId = this.props.match.params;
 
     axios.get("shop/restaurants/" + resId.id).then(response => {
       this.setState({ restaurant: response.data });
     });
     this.props.onFetchFoods(resId);
-    console.log(this.props);
+
     axios.get("shop/status").then(response => {
       if (response.data) {
-        console.log(response.data.items);
         this.setState({ cart: { items: response.data.items } });
       }
     });
@@ -41,7 +38,7 @@ class SingleRestaurant extends Component {
     // const {} = this.state;
     // const {} = this.props;
     const items = [...this.state.cart.items];
-    console.log(items);
+
     const foodIndex = items.findIndex(cp => {
       return cp["foodId"].toString() === id.toString();
     });
@@ -65,9 +62,7 @@ class SingleRestaurant extends Component {
 
     await this.setState({ cart: { items } });
     const cartItems = [...this.state.cart.items];
-    axios
-      .post("/shop/add-to-cart", cartItems)
-      .then(response => console.log(response));
+    axios.post("/shop/add-to-cart", cartItems);
   };
 
   postRestaurantRating = stars => {
@@ -80,7 +75,7 @@ class SingleRestaurant extends Component {
 
   closeFormHandler = e => {
     e.preventDefault();
-    console.log(e);
+
     this.props.history.push("/shop/" + this.props.match.params.id);
   };
 

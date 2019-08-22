@@ -2,10 +2,10 @@ import React from "react";
 import classes from "./Stars.module.css";
 import Star from "./Star/Star";
 const stars = props => {
-  let stars = 0;
-  for (let i = 1; i <= 5; i++) {
-    stars += <Star starNumber={i} />;
-  }
+  // let starss;
+  // for (let i = 1; i <= 5; i++) {
+  //   starss += <Star starNumber={i} />;
+  // }
   return (
     <ul className={classes.Stars}>
       <Star starNumber="1" clicked={props.starClicked} />
