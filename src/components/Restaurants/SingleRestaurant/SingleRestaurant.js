@@ -23,19 +23,19 @@ class SingleRestaurant extends Component {
     const resId = this.props.match.params;
     this.props.onFetchRestaurant(resId);
     this.props.onFetchFoods(resId);
-
-    axios.get("shop/status").then(response => {
-      if (response.data) {
-        this.setState({ cart: { items: response.data.items } });
-      }
-    });
+    this.props.onFetchCart();
+    // axios.get("shop/status").then(response => {
+    //   if (response.data) {
+    //     this.setState({ cart: { items: response.data.items } });
+    //   }
+    // });
   }
 
   addToCart = async id => {
     // const {} = this.state;
     // const {} = this.props;
-    const items = [...this.state.cart.items];
-
+    const items = [...this.props.cart.items];
+    console.log(items);
     const foodIndex = items.findIndex(cp => {
       return cp["foodId"].toString() === id.toString();
     });
@@ -43,7 +43,7 @@ class SingleRestaurant extends Component {
     let newQuantity = 1;
 
     if (foodIndex >= 0) {
-      newQuantity = this.state.cart.items[foodIndex].quantity + 1;
+      newQuantity = this.props.cart.items[foodIndex].quantity + 1;
       items[foodIndex].quantity = newQuantity;
     } else {
       items.push({
@@ -52,14 +52,19 @@ class SingleRestaurant extends Component {
         restaurantId: this.props.match.params.id
       });
     }
+
     // console.log(items[0]);
     // if (items[0].quantity === 0) {
     //   items.shift();
     // }
 
-    await this.setState({ cart: { items } });
-    const cartItems = [...this.state.cart.items];
-    axios.post("/shop/add-to-cart", cartItems);
+    // await this.setState({ cart: { items } });
+    console.log(items);
+    await this.props.onPostCart(items);
+    await this.props.onFetchCart();
+    const cartItems = [...this.props.cart.items];
+
+    await axios.post("/shop/add-to-cart", cartItems);
   };
 
   postRestaurantRating = stars => {
@@ -135,14 +140,17 @@ const mapStateToProps = state => {
   return {
     restaurant: state.restaurant.restaurant,
     foods: state.food.foods,
-    loading: state.food.loading
+    loading: state.food.loading,
+    cart: { items: state.cart.items }
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onFetchFoods: id => dispatch(actions.fetchFoods(id)),
-    onFetchRestaurant: id => dispatch(actions.fetchRestaurant(id))
+    onFetchRestaurant: id => dispatch(actions.fetchRestaurant(id)),
+    onFetchCart: () => dispatch(actions.fetchCart()),
+    onPostCart: cartItems => dispatch(actions.postAddToCart(cartItems))
   };
 };
 

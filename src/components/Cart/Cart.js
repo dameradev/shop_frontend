@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import axios from "../../apis/shopBackend";
 import classes from "./Cart.module.css";
+import * as actions from "../../store/actions/index";
 
 class Cart extends Component {
   state = {
@@ -8,29 +10,21 @@ class Cart extends Component {
   };
 
   loadData() {
-    if (this.state.cartItems.length < 1) {
-      axios.get("shop/get-cart").then(response => {
-        this.setState({ cartItems: response.data.items });
-      });
-    }
+    this.props.onFetchCart();
   }
   componentDidMount() {
     this.loadData();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.cartItems.items !== this.state.items ||
-      prevProps.show !== this.props.show
-    ) {
-      axios.get("shop/get-cart").then(response => {
-        this.setState({ cartItems: response.data.items });
-      });
+    if (prevProps.show !== this.props.show) {
+      this.props.onFetchCart();
     }
   }
 
   render() {
-    const foods = this.state.cartItems
+    console.log(this.props.cart.items);
+    const foods = this.props.cart.items
       .map(ci => {
         return [ci["foodId"], ci["quantity"]];
       })
@@ -52,4 +46,20 @@ class Cart extends Component {
     ) : null;
   }
 }
-export default Cart;
+
+const mapStateToProps = state => {
+  return {
+    cart: { items: state.cart.items }
+  };
+};
+
+const mapDipatchToProps = dispatch => {
+  return {
+    onFetchCart: () => dispatch(actions.fetchCart())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDipatchToProps
+)(Cart);

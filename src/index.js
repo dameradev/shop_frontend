@@ -10,12 +10,14 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import restaurantReducer from "./store/reducers/restaurant";
 import foodReducer from "./store/reducers/food";
+import cartReducer from "./store/reducers/cart";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   restaurant: restaurantReducer,
-  food: foodReducer
+  food: foodReducer,
+  cart: cartReducer
 });
 
 const store = createStore(
