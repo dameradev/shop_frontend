@@ -31,3 +31,10 @@ export const postAddToCart = cartItems => {
     dispatch(postAddToCartSuccess(cartItems));
   };
 };
+
+export const addToCart = id => {
+  return {
+    type: actionTypes.ADD_TO_CART,
+    id
+  };
+};

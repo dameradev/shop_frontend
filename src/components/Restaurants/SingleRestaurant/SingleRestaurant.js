@@ -125,7 +125,7 @@ class SingleRestaurant extends Component {
 
             <FoodList
               foods={this.props.foods}
-              clicked={this.addToCart}
+              clicked={this.props.onAddToCart}
               loading={this.props.loading}
             />
           </div>
@@ -150,7 +150,8 @@ const mapDispatchToProps = dispatch => {
     onFetchFoods: id => dispatch(actions.fetchFoods(id)),
     onFetchRestaurant: id => dispatch(actions.fetchRestaurant(id)),
     onFetchCart: () => dispatch(actions.fetchCart()),
-    onPostCart: cartItems => dispatch(actions.postAddToCart(cartItems))
+    onPostCart: cartItems => dispatch(actions.postAddToCart(cartItems)),
+    onAddToCart: id => dispatch(actions.addToCart(id))
   };
 };
 
