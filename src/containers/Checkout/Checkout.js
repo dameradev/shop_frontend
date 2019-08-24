@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import classes from "./Checkout.module.css";
+import ContactData from "./ContactData/ContactData";
 
 class Checkout extends Component {
   render() {
@@ -22,6 +23,7 @@ class Checkout extends Component {
           <p className={classes.TotalPrice}>
             Total Price: {this.props.totalPrice}$
           </p>
+          <ContactData />
         </div>
       </div>
     );

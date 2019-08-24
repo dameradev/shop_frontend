@@ -30,11 +30,11 @@ class Cart extends Component {
             <div>
               <h2>{foodItem.name}</h2>
               <span onClick={() => this.props.onAddQuantity(foodItem._id)}>
-                <i class="fa fa-plus-square" />
+                <i className="fa fa-plus-square" />
               </span>
 
               <span onClick={() => this.props.onRemoveQuantity(foodItem._id)}>
-                <i class="fa fa-minus-square" />
+                <i className="fa fa-minus-square" />
               </span>
               <p>Quantity: {foodItem.quantity}</p>
             </div>
@@ -45,8 +45,7 @@ class Cart extends Component {
         );
       });
     }
-    // return <div>{foods}</div>;
-    console.log(foods);
+
     return this.props.show ? (
       <div className={classes.Cart}>
         <h3>Shopping cart</h3>
