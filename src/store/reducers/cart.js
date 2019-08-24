@@ -53,6 +53,34 @@ const reducer = (state = initialState, action) => {
           total: newTotal
         };
       }
+    case actionTypes.ADD_QUANTITY:
+      let updatedItem = state.addedItems.find(item => item._id === action.id);
+
+      updatedItem.quantity += 1;
+      let newTotal = state.total + updatedItem.price;
+      return {
+        ...state,
+        total: newTotal
+      };
+    case actionTypes.REMOVE_QUANTITY:
+      let removedItem = state.addedItems.find(item => item._id === action.id);
+      //if the qt == 0 then it should be removed
+      if (removedItem.quantity === 1) {
+        let new_items = state.addedItems.filter(item => item._id !== action.id);
+        let newTotal = state.total - removedItem.price;
+        return {
+          ...state,
+          addedItems: new_items,
+          total: newTotal
+        };
+      } else {
+        removedItem.quantity -= 1;
+        let newTotal = state.total - removedItem.price;
+        return {
+          ...state,
+          total: newTotal
+        };
+      }
     default:
       return state;
   }

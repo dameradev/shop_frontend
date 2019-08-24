@@ -38,3 +38,17 @@ export const addToCart = id => {
     id
   };
 };
+
+export const addQuantity = id => {
+  return {
+    type: actionTypes.ADD_QUANTITY,
+    id
+  };
+};
+
+export const removeQuantity = id => {
+  return {
+    type: actionTypes.REMOVE_QUANTITY,
+    id
+  };
+};
