@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import classes from "./Cart.module.css";
@@ -19,27 +20,46 @@ class Cart extends Component {
   }
 
   render() {
-    console.log(this.props.items);
+    let foods = <p>Your cart is empty</p>;
     // return <p>dame</p>;
-    const foods = this.props.items.map(foodItem => {
-      return (
-        <div className={classes.FoodItem} key={foodItem._id}>
-          <h4>{foodItem.name}</h4>
-          <p>Quantity: {foodItem.quantity}</p>
-          <span onClick={() => this.props.onAddQuantity(foodItem._id)}>+</span>
-          <span onClick={() => this.props.onRemoveQuantity(foodItem._id)}>
-            -
-          </span>
-        </div>
-      );
-    });
+
+    if (this.props.items.length > 0) {
+      foods = this.props.items.map(foodItem => {
+        return (
+          <div className={classes.FoodItem} key={foodItem._id}>
+            <div>
+              <h2>{foodItem.name}</h2>
+              <span onClick={() => this.props.onAddQuantity(foodItem._id)}>
+                <i class="fa fa-plus-square" />
+              </span>
+
+              <span onClick={() => this.props.onRemoveQuantity(foodItem._id)}>
+                <i class="fa fa-minus-square" />
+              </span>
+              <p>Quantity: {foodItem.quantity}</p>
+            </div>
+            <div>
+              <img src="http://www.pngmart.com/files/1/Pepperoni-Pizza.png" />
+            </div>
+          </div>
+        );
+      });
+    }
     // return <div>{foods}</div>;
     console.log(foods);
     return this.props.show ? (
       <div className={classes.Cart}>
-        <h3>Your cart</h3>
+        <h3>Shopping cart</h3>
         {foods}
-        <p>Total Price: {this.props.total}</p>
+        <p className={classes.TotalPrice}>
+          <span>
+            Total Price:
+            <span className={classes.TotalPriceTag}>{this.props.total}$</span>
+          </span>
+          <Link to="/checkout" className={classes.TotalPriceTag}>
+            Checkout
+          </Link>
+        </p>
         {/* <p>{this.state.cartItems}</p> */}
       </div>
     ) : null;

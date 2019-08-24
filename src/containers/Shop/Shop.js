@@ -9,6 +9,14 @@ class Shop extends Component {
     showCart: true
   };
 
+  cartOpenedHandler = () => {
+    this.setState({ showCart: true });
+  };
+
+  cartClosedHandler = () => {
+    this.setState({ showCart: false });
+  };
+
   render() {
     return (
       <div className={classes.Shop}>

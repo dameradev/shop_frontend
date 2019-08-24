@@ -13,16 +13,47 @@
   z-index: 1000;
 }
 
+.Cart i {
+  color: brown;
+  font-size: 1.2rem;
+  margin-right: 10px;
+  display: inline-block;
+}
+.Cart a {
+  text-decoration: none;
+}
+
 .FoodItem {
   border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
 }
 
 .FoodItem:last-child {
   border: none;
 }
 
+.FoodItem img {
+  max-width: 10vw;
+}
+
+.TotalPrice {
+  display: flex;
+  justify-content: space-between;
+}
+
+.TotalPriceTag {
+  background-color: brown;
+  padding: 5px;
+  color: white;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
 @media (min-width: 600px) {
   .Cart {
     width: 500px;
+    position: fixed;
+    display: inline;
   }
 }
