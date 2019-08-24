@@ -7,8 +7,9 @@
 @media (min-width: 40rem) {
   .Restaurants {
     display: flex;
-    flex-flow: row;
-    justify-content: space-evenly;
+    flex-flow: column;
+    justify-content: space-between;
     flex-wrap: wrap;
+    width: 70%;
   }
 }
