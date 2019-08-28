@@ -7,3 +7,5 @@ export {
   addQuantity,
   removeQuantity
 } from "./cart";
+
+export { fetchOrders } from "./order";
