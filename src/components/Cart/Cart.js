@@ -6,18 +6,18 @@ import classes from "./Cart.module.css";
 import * as actions from "../../store/actions/index";
 
 class Cart extends Component {
-  loadData() {
-    // this.props.onFetchCart();
-  }
-  componentDidMount() {
-    this.loadData();
-  }
+  // loadData() {
+  //   // this.props.onFetchCart();
+  // }
+  // componentDidMount() {
+  //   this.loadData();
+  // }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.items !== this.props.items) {
-      console.log("yes");
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.items !== this.props.items) {
+  //     console.log("yes");
+  //   }
+  // }
 
   render() {
     let foods = <p>Your cart is empty</p>;

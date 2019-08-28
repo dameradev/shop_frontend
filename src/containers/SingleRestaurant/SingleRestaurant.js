@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
-import axios from "../../../apis/shopBackend";
-import FoodList from "../Food/FoodList";
+import axios from "../../apis/shopBackend";
+import FoodList from "../../components/Restaurants/Food/FoodList";
 import classes from "./SingleRestaurant.module.css";
-import CreateFood from "../Food/CreateFood/CreateFood";
-import RateRestaurant from "../RateRestaurant/RateRestaurant";
+import CreateFood from "../../components/Restaurants/Food/CreateFood/CreateFood";
+import RateRestaurant from "../../components/Restaurants/RateRestaurant/RateRestaurant";
 
-import * as actions from "../../../store/actions/index";
+import * as actions from "../../store/actions/index";
 
 class SingleRestaurant extends Component {
   state = {

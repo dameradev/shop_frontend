@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import axios from "../../../apis/shopBackend";
+import { connect } from "react-redux";
 import Input from "../../../components/UI/Input/Input";
 
 import classes from "./ContactData.module.css";
+
 class ContactData extends Component {
   state = {
     orderData: {
@@ -23,6 +26,9 @@ class ContactData extends Component {
       }
     }
   };
+
+  postOrderHandler = data => {};
+
   inputChangedHandler = (event, inputIdentifier) => {
     const updatedForm = { ...this.state.orderData };
     const updatedFormElement = { ...this.state.orderData[inputIdentifier] };
@@ -38,7 +44,20 @@ class ContactData extends Component {
         formElementIdentifier
       ].value;
     }
-    console.log(formData);
+
+    let orderedItemsArr = [];
+
+    this.props.orderedItems.map(orderedItem => {
+      orderedItemsArr.push({
+        name: orderedItem.name,
+        quantity: orderedItem.quantity,
+        price: orderedItem.price
+      });
+    });
+
+    const orderData = { items: orderedItemsArr, formData: formData };
+
+    axios.post("shop/create-order", orderData);
   };
   render() {
     const formElementsArray = [];
@@ -66,4 +85,10 @@ class ContactData extends Component {
   }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+  return {
+    orderedItems: state.cart.addedItems
+  };
+};
+
+export default connect(mapStateToProps)(ContactData);
