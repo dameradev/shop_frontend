@@ -1,3 +1,14 @@
 .OrderItem {
-  background: greenyellow;
+  border: 2px solid #eee;
+  height: 10vh;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.OrderItem span {
+  padding: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-right: 10px;
 }
