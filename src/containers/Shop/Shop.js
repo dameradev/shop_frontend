@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import classes from "./Shop.module.css";
 import Restaurants from "./Restaurants/Restaurants";
 import Modal from "../../components/UI/Modal/Modal";
-import FoodList from "../../components/Restaurants/Food/FoodList";
+import News from "../../components/News/News";
 import axios from "../../apis/shopBackend";
 
 class Shop extends Component {
@@ -34,8 +34,8 @@ class Shop extends Component {
           <Link to={"/create-restaurant"}>Create a new restaurant</Link>
         </div>
         <div className={classes.ShopContent}>
+          <News />
           <Restaurants />
-          <div>Dame</div>
         </div>
       </div>
     );

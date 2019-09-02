@@ -1,0 +1,12 @@
+.News {
+  position: fixed;
+  right: 10%;
+  width: 20%;
+  font-size: 0.8rem;
+}
+
+.News h1 {
+  color: brown;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
