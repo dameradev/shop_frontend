@@ -31,7 +31,7 @@ class Shop extends Component {
         <Modal />
         <div className={classes.ShopHeader}>
           <h3>Restaurants page</h3>
-          <Link to={"/create-restaurant"}>Create a new restaurant</Link>
+          <Link to="/create-restaurant">Create a new restaurant</Link>
         </div>
         <div className={classes.ShopContent}>
           <News />

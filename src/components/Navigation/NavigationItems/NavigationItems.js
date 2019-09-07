@@ -6,6 +6,7 @@ const navigationItems = props => (
   <ul className={classes.NavigationItems}>
     <NavigationItem link="/">Shop</NavigationItem>
     <NavigationItem link="/orders">Your Orders</NavigationItem>
+    <NavigationItem link="/auth">Log in</NavigationItem>
   </ul>
 );
 export default navigationItems;

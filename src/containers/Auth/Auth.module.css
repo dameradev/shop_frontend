@@ -1,0 +1,12 @@
+.Auth {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.Auth form {
+  margin-top: 3rem;
+  padding: 5rem;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+}

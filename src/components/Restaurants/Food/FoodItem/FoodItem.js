@@ -4,13 +4,22 @@ const foodItem = props => {
   let id = props.id;
   return (
     <li className={classes.FoodItem}>
-      <h3>{props.name}</h3>
-      <p>{props.description}</p>
-      <p>
-        Price: <strong>{props.price}</strong>
-      </p>
-      <p>{props.id}</p>
-      <button onClick={() => props.foodClicked(id)}>Add to cart</button>
+      <div className={classes.ItemDescription}>
+        <h3>{props.name}</h3>
+        <p>{props.description}</p>
+        <p>
+          Price: <strong>{props.price}</strong>
+        </p>
+        <button
+          className={classes.AddToCart}
+          onClick={() => props.foodClicked(id)}
+        >
+          Add to cart
+        </button>
+      </div>
+      <div className={classes.ItemImage}>
+        <img src="http://www.pngmart.com/files/1/Pepperoni-Pizza.png" />
+      </div>
     </li>
   );
 };
