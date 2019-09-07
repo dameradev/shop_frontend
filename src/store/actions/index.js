@@ -9,3 +9,5 @@ export {
 } from "./cart";
 
 export { fetchOrders } from "./order";
+
+export { auth } from "./auth";
