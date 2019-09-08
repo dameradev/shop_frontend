@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import classes from "./Checkout.module.css";
-import ContactData from "./ContactData/ContactData";
+// import ContactData from "./ContactData/ContactData";
 
 import Button from "../../components/UI/Button/Button";
 // import * as actions from "../../store/actions/index";
@@ -9,10 +9,10 @@ class Checkout extends Component {
   render() {
     const cartItems = this.props.items.map(cartItem => (
       <div key={cartItem._id} className={classes.CartItem}>
-        <h4>{cartItem.name}</h4>
+        <h4>{cartItem.foodId.name}</h4>
         <div className={classes.CartItemDetails}>
           <p>Quanitity: {cartItem.quantity}</p>
-          <p>Price: {cartItem.price}$</p>
+          <p>Price: {cartItem.foodId.price}$</p>
         </div>
       </div>
     ));

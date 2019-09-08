@@ -7,20 +7,18 @@ import * as actions from "../../store/actions/index";
 
 class Cart extends Component {
   componentDidMount() {
-    console.log(this.props.userId);
     this.props.onFetchCart(this.props.userId);
   }
 
   render() {
     let foods = <p>Your cart is empty</p>;
-    // return <p>dame</p>;
 
     if (this.props.items.length > 0) {
       foods = this.props.items.map(foodItem => {
         return (
           <div className={classes.FoodItem} key={foodItem._id}>
             <div>
-              <h2>{foodItem.name}</h2>
+              <h2>{foodItem.foodId ? foodItem.foodId.name : null}</h2>
               <span onClick={() => this.props.onAddQuantity(foodItem._id)}>
                 <i className="fa fa-plus-square" />
               </span>

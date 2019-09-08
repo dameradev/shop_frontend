@@ -2,10 +2,11 @@ import * as actionTypes from "./actionTypes";
 
 import axios from "../../apis/shopBackend";
 
-export const fetchCartSuccess = items => {
+export const fetchCartSuccess = (items, totalPrice) => {
   return {
     type: actionTypes.FETCH_CART_SUCCESS,
-    items
+    items,
+    totalPrice
   };
 };
 
@@ -15,7 +16,9 @@ export const fetchCart = userId => {
     axios.get("shop/status/" + userId).then(response => {
       console.log(response, "response");
       if (response.data) {
-        dispatch(fetchCartSuccess(response.data));
+        dispatch(
+          fetchCartSuccess(response.data.items, response.data.totalPrice)
+        );
       }
     });
   };

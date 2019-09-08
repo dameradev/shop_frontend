@@ -140,6 +140,7 @@ class Auth extends Component {
       <div className={classes.Auth}>
         {authRedirect}
         <form onSubmit={this.onSubmitHandler}>
+          <h2>{!this.state.isSignup ? "Log in" : "Sign up"} form</h2>
           {form}
           <Button btnType="Success">Submit</Button>
         </form>
