@@ -16,6 +16,8 @@ class FoodList extends Component {
             price={food.price}
             id={food._id}
             foodClicked={this.props.clicked}
+            userId={this.props.userId}
+            restaurantId={this.props.restaurantId}
             // onClick={this.props.foodClicked(food.id)}
           />
         );

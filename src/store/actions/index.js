@@ -2,10 +2,10 @@ export { fetchRestaurants, fetchRestaurant } from "./restaurant";
 export { fetchFoods } from "./food";
 export {
   fetchCart,
-  postAddToCart,
   addToCart,
   addQuantity,
-  removeQuantity
+  removeQuantity,
+  postAddToCart
 } from "./cart";
 
 export { fetchOrders } from "./order";

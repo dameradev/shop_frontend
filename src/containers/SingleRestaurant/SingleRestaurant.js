@@ -31,42 +31,6 @@ class SingleRestaurant extends Component {
     // });
   }
 
-  addToCart = async id => {
-    // const {} = this.state;
-    // const {} = this.props;
-    const items = [...this.props.cart.items];
-    console.log(items);
-    const foodIndex = items.findIndex(cp => {
-      return cp["foodId"].toString() === id.toString();
-    });
-
-    let newQuantity = 1;
-
-    if (foodIndex >= 0) {
-      newQuantity = this.props.cart.items[foodIndex].quantity + 1;
-      items[foodIndex].quantity = newQuantity;
-    } else {
-      items.push({
-        foodId: id,
-        quantity: newQuantity,
-        restaurantId: this.props.match.params.id
-      });
-    }
-
-    // console.log(items[0]);
-    // if (items[0].quantity === 0) {
-    //   items.shift();
-    // }
-
-    // await this.setState({ cart: { items } });
-    console.log(items);
-    await this.props.onPostCart(items);
-    await this.props.onFetchCart();
-    const cartItems = [...this.props.cart.items];
-
-    await axios.post("/shop/add-to-cart", cartItems);
-  };
-
   postRestaurantRating = stars => {
     let data = {
       stars: stars,
@@ -125,8 +89,10 @@ class SingleRestaurant extends Component {
 
             <FoodList
               foods={this.props.foods}
-              clicked={this.props.onAddToCart}
+              clicked={this.props.onPostAddToCart}
               loading={this.props.loading}
+              userId={this.props.userId}
+              restaurantId={this.props.restaurant._id}
             />
           </div>
         </div>
@@ -141,7 +107,8 @@ const mapStateToProps = state => {
     restaurant: state.restaurant.restaurant,
     foods: state.food.foods,
     loading: state.food.loading,
-    cart: { items: state.cart.items }
+    cart: { items: state.cart.items },
+    userId: state.auth.userId
   };
 };
 
@@ -150,8 +117,8 @@ const mapDispatchToProps = dispatch => {
     onFetchFoods: id => dispatch(actions.fetchFoods(id)),
     onFetchRestaurant: id => dispatch(actions.fetchRestaurant(id)),
     onFetchCart: () => dispatch(actions.fetchCart()),
-    onPostCart: cartItems => dispatch(actions.postAddToCart(cartItems)),
-    onAddToCart: id => dispatch(actions.addToCart(id))
+    onPostAddToCart: (id, userId, restaurantId) =>
+      dispatch(actions.postAddToCart(id, userId, restaurantId))
   };
 };
 

@@ -34,3 +34,5 @@ export const fetchOrders = () => {
       });
   };
 };
+
+export const postOrder = () => {};

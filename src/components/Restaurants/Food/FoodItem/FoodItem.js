@@ -12,7 +12,9 @@ const foodItem = props => {
         </p>
         <button
           className={classes.AddToCart}
-          onClick={() => props.foodClicked(id)}
+          onClick={() =>
+            props.foodClicked(id, props.userId, props.restaurantId)
+          }
         >
           Add to cart
         </button>

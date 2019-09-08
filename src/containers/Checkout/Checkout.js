@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import classes from "./Checkout.module.css";
 import ContactData from "./ContactData/ContactData";
 
+import Button from "../../components/UI/Button/Button";
+// import * as actions from "../../store/actions/index";
 class Checkout extends Component {
   render() {
     const cartItems = this.props.items.map(cartItem => (
@@ -23,7 +25,8 @@ class Checkout extends Component {
           <p className={classes.TotalPrice}>
             Total Price: {this.props.totalPrice}$
           </p>
-          <ContactData />
+          <Button btnType="Success">Order</Button>
+          {/* <ContactData /> */}
         </div>
       </div>
     );
@@ -36,5 +39,13 @@ const mapStateToProps = state => {
     totalPrice: state.cart.total
   };
 };
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     onPostCart: () => {
+//       dispatch(actions.postCart());
+//     }
+//   };
+// };
 
 export default connect(mapStateToProps)(Checkout);

@@ -4,7 +4,8 @@ const initialState = {
   items: [],
   addedItems: [],
   foods: [],
-  total: 0
+  total: 0,
+  userId: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,7 +51,8 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           addedItems: [...state.addedItems, addedItem],
-          total: newTotal
+          total: newTotal,
+          userId: action.userId
         };
       }
     case actionTypes.ADD_QUANTITY:
