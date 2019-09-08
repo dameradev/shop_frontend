@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.FETCH_CART_SUCCESS:
       return {
         ...state,
-        items: action.items
+        addedItems: action.items
       };
     case actionTypes.ADD_TO_CART:
       let addedItem = state.foods.find(item => item._id === action.id);

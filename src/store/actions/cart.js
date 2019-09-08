@@ -43,10 +43,17 @@ export const removeQuantity = id => {
 
 export const postAddToCart = (foodId, userId, restaurantId) => {
   console.log(foodId, userId);
+
   const cartData = { foodId, userId, restaurantId };
   return dispatch => {
     axios
       .post("shop/add-to-cart", cartData)
-      .then(dispatch(addToCart(foodId, userId, restaurantId)));
+      .then(response => {
+        return dispatch(fetchCartSuccess(response.data));
+      })
+      .then(data => {
+        console.log(data);
+        dispatch(addToCart(foodId, userId, restaurantId));
+      });
   };
 };
