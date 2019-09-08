@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import Aux from "../Aux/Aux";
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
 import Cart from "../../components/Cart/Cart";
 import CartButton from "../../components/Cart/CartButton/CartButton";
+
 class Layout extends Component {
   state = {
     showSideDrawer: false,
@@ -38,12 +41,24 @@ class Layout extends Component {
           show={this.state.showSideDrawer}
           backDropClicked={this.sideDrawerClosed}
         />
-        <SideDrawer open={this.state.showSideDrawer} />
-        <Toolbar drawerToggleClicked={this.drawerToggleOpened} />
+        <SideDrawer
+          open={this.state.showSideDrawer}
+          isAuth={this.props.isAuthenticated}
+        />
+        <Toolbar
+          drawerToggleClicked={this.drawerToggleOpened}
+          isAuth={this.props.isAuthenticated}
+        />
 
         <main>{this.props.children}</main>
       </Aux>
     );
   }
 }
-export default Layout;
+
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+export default connect(mapStateToProps)(Layout);

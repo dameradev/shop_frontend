@@ -1,7 +1,10 @@
 .NavigationItem {
-  margin-right: 5px;
+  margin-right: 2rem;
   margin-bottom: 5px;
   font-size: 1.2rem;
+}
+.NavigationItem:last-of-type {
+  margin-right: 0;
 }
 
 .NavigationItem a {

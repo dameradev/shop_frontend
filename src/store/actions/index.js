@@ -10,4 +10,4 @@ export {
 
 export { fetchOrders } from "./order";
 
-export { auth, authCheckState } from "./auth";
+export { auth, authCheckState, logout } from "./auth";
