@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
 import Layout from "./hoc/Layout/Layout";
@@ -10,7 +11,13 @@ import Orders from "./components/Orders/Orders";
 import Auth from "./containers/Auth/Auth";
 // import CreateFood from "./components/Food/CreateFood/CreateFood";
 
+import * as actions from "./store/actions/index";
+
 class App extends Component {
+  componentDidMount() {
+    this.props.onTryAuthLogin();
+  }
+
   render() {
     return (
       <Layout>
@@ -28,4 +35,19 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAuthLogin: () => dispatch(actions.authCheckState())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

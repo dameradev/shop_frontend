@@ -7,10 +7,9 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (authData, token, id) => {
+export const authSuccess = (token, id) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    authData,
     token,
     userId: id
   };
@@ -20,6 +19,23 @@ export const authFail = error => {
   return {
     type: actionTypes.AUTH_FAIL,
     error
+  };
+};
+
+const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("expirationDate");
+  localStorage.removeItem("userId");
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  };
+};
+
+export const checkAuthTimeout = expirationTime => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, expirationTime * 1000);
   };
 };
 
@@ -35,9 +51,36 @@ export const auth = (email, password, name, isSignup) => {
     axios
       .post(url, authData)
       .then(response => {
-        console.log(response);
-        dispatch(authSuccess(authData, response.data.token, response.data.id));
+        const expirationDate = new Date(
+          new Date().getTime() + response.data.expiresIn * 1000
+        );
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data.id);
+        localStorage.setItem("expirationDate", expirationDate);
+        dispatch(authSuccess(response.data.token, response.data.id));
       })
       .catch(error => dispatch(authFail(error)));
+  };
+};
+
+export const authCheckState = () => {
+  return dispatch => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      dispatch(logout());
+    } else {
+      const expirationDate = new Date(localStorage.getItem("expirationDate"));
+      const userId = localStorage.getItem("userId");
+      if (expirationDate < new Date()) {
+        dispatch(logout());
+      } else {
+        dispatch(authSuccess(token, userId));
+        dispatch(
+          checkAuthTimeout(
+            (expirationDate.getTime() - new Date().getTime()) / 1000
+          )
+        );
+      }
+    }
   };
 };

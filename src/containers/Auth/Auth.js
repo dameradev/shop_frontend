@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import classes from "./Auth.module.css";
 
@@ -83,21 +84,12 @@ class Auth extends Component {
   };
 
   switchAuthModeHandler = () => {
-    const updatedControls = {
-      ...this.state.controls,
-      ["email"]: {
-        ...this.state.controls["email"],
-        value: ""
-      },
-      ["name"]: {
-        ...this.state.controls["name"],
-        value: ""
-      },
-      ["password"]: {
-        ...this.state.controls["password"],
-        value: ""
-      }
-    };
+    const updatedControls = { ...this.state.controls };
+
+    updatedControls.email.value = "";
+    updatedControls.name.value = "";
+    updatedControls.password.value = "";
+
     this.setState(prevState => {
       return { isSignup: !prevState.isSignup, controls: updatedControls };
     });
@@ -121,7 +113,10 @@ class Auth extends Component {
         config: this.state.controls[key]
       });
     }
-
+    let authRedirect = null;
+    if (this.props.isAuthenticated) {
+      authRedirect = <Redirect to="/" />;
+    }
     let form = formItemsArr.map((formElement, index) => {
       if (!this.state.isSignup && formItemsArr.length > 2) {
         formItemsArr.splice(0, 1);
@@ -143,6 +138,7 @@ class Auth extends Component {
 
     return (
       <div className={classes.Auth}>
+        {authRedirect}
         <form onSubmit={this.onSubmitHandler}>
           {form}
           <Button btnType="Success">Submit</Button>
@@ -155,6 +151,12 @@ class Auth extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     onAuth: (email, password, name, isSignup) =>
@@ -162,6 +164,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Auth);
