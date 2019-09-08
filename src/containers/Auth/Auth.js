@@ -10,19 +10,6 @@ import * as actions from "../../store/actions/index";
 class Auth extends Component {
   state = {
     controls: {
-      name: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "Your name"
-        },
-        value: "",
-        validation: {
-          required: true
-        },
-        valid: false,
-        touched: false
-      },
       email: {
         elementType: "input",
         elementConfig: {
@@ -36,6 +23,20 @@ class Auth extends Component {
         valid: false,
         touched: false
       },
+      name: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your name"
+        },
+        value: "",
+        validation: {
+          required: true
+        },
+        valid: false,
+        touched: false
+      },
+
       password: {
         elementType: "input",
         elementConfig: {
@@ -82,8 +83,23 @@ class Auth extends Component {
   };
 
   switchAuthModeHandler = () => {
+    const updatedControls = {
+      ...this.state.controls,
+      ["email"]: {
+        ...this.state.controls["email"],
+        value: ""
+      },
+      ["name"]: {
+        ...this.state.controls["name"],
+        value: ""
+      },
+      ["password"]: {
+        ...this.state.controls["password"],
+        value: ""
+      }
+    };
     this.setState(prevState => {
-      return { isSignup: !prevState.isSignup };
+      return { isSignup: !prevState.isSignup, controls: updatedControls };
     });
   };
 
@@ -106,7 +122,11 @@ class Auth extends Component {
       });
     }
 
-    let form = formItemsArr.map(formElement => {
+    let form = formItemsArr.map((formElement, index) => {
+      if (!this.state.isSignup && formItemsArr.length > 2) {
+        formItemsArr.splice(0, 1);
+      }
+
       return (
         <Input
           key={formElement.id}

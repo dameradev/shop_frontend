@@ -12,6 +12,7 @@ import restaurantReducer from "./store/reducers/restaurant";
 import foodReducer from "./store/reducers/food";
 import cartReducer from "./store/reducers/cart";
 import orderReducer from "./store/reducers/order";
+import authReducer from "./store/reducers/auth";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   restaurant: restaurantReducer,
   food: foodReducer,
   cart: cartReducer,
-  order: orderReducer
+  order: orderReducer,
+  auth: authReducer
 });
 
 const store = createStore(
