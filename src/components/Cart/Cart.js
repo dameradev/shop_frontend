@@ -6,18 +6,10 @@ import classes from "./Cart.module.css";
 import * as actions from "../../store/actions/index";
 
 class Cart extends Component {
-  // loadData() {
-  //   // this.props.onFetchCart();
-  // }
-  // componentDidMount() {
-  //   this.loadData();
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.items !== this.props.items) {
-  //     console.log("yes");
-  //   }
-  // }
+  componentDidMount() {
+    console.log(this.props.userId);
+    this.props.onFetchCart(this.props.userId);
+  }
 
   render() {
     let foods = <p>Your cart is empty</p>;
@@ -67,14 +59,15 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
   return {
-    items: state.cart.addedItems,
-    total: state.cart.total
+    items: state.cart.addedItems || [],
+    total: state.cart.total,
+    userId: state.auth.userId
   };
 };
 
 const mapDipatchToProps = dispatch => {
   return {
-    onFetchCart: () => dispatch(actions.fetchCart()),
+    onFetchCart: userId => dispatch(actions.fetchCart(userId)),
     onAddQuantity: id => dispatch(actions.addQuantity(id)),
     onRemoveQuantity: id => dispatch(actions.removeQuantity(id))
   };

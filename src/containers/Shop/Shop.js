@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Shop.module.css";
+import { connect } from "react-redux";
+
 import Restaurants from "./Restaurants/Restaurants";
 import Modal from "../../components/UI/Modal/Modal";
 import News from "../../components/News/News";
 import axios from "../../apis/shopBackend";
+
+import * as actions from "../../store/actions/index";
 
 class Shop extends Component {
   componentDidMount() {
@@ -18,6 +22,7 @@ class Shop extends Component {
   };
 
   cartOpenedHandler = () => {
+    this.props.onFetchCart(this.props.userId);
     this.setState({ showCart: true });
   };
 
@@ -42,4 +47,19 @@ class Shop extends Component {
   }
 }
 
-export default Shop;
+const mapStateToProps = state => {
+  return {
+    userId: state.auth.userId
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchCart: userId => dispatch(actions.fetchCart(userId))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Shop);

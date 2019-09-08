@@ -9,11 +9,13 @@ export const fetchCartSuccess = items => {
   };
 };
 
-export const fetchCart = () => {
+export const fetchCart = userId => {
+  console.log("shop/status/" + userId, "fetch cart");
   return dispatch => {
-    axios.get("shop/status").then(response => {
+    axios.get("shop/status/" + userId).then(response => {
+      console.log(response, "response");
       if (response.data) {
-        dispatch(fetchCartSuccess(response.data.items));
+        dispatch(fetchCartSuccess(response.data));
       }
     });
   };
